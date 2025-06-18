@@ -1,0 +1,5 @@
+DROP DATABASE IF EXISTS lamona;
+DROP DATABASE IF EXISTS lamona_test;
+
+CREATE DATABASE lamona_test;
+CREATE DATABASE lamona;

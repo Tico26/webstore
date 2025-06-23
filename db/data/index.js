@@ -1,27 +1,27 @@
 const shops = require("./shops");
-const items = require("./items");
+const products = require("./products");
 const categories = require("./categories");
-const itemCategories = require("./itemCategories");
+const productCategories = require("./productCategories");
 const shopTags = require("./shopTags");
 const shopTagMap = require("./shopTagMap");
-const itemColours = require("./itemColours");
-const itemColourMap = require("./itemColourMap");
+const productColours = require("./productColours");
+const productColourMap = require("./productColourMap");
 const users = require("./users");
-const favourites = require("./favourites");
+const favouriteShops = require("./favouriteShops");
 const reviews = require("./reviews");
-const itemImages = require("./itemImages");
+const productImages = require("./productImages");
 
 module.exports = {
   shops,
-  items,
+  products,
   categories,
-  itemCategories,
+  productCategories,
   shopTags,
   shopTagMap,
-  itemColours,
-  itemColourMap,
+  productColours,
+  productColourMap,
   users,
-  favourites,
+  favouriteShops,
   reviews,
-  itemImages,
+  productImages,
 };

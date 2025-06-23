@@ -1,0 +1,4 @@
+.env.*
+test-connection.js
+node_modules
+check-tables.sql

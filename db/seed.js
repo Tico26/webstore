@@ -208,7 +208,6 @@ const createFavouriteShopsTable = () => {
   return db.query(`
           CREATE TABLE favourite_shops (
             user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
-            product_id INT REFERENCES products(product_id) ON DELETE CASCADE,
             shop_id INT REFERENCES shops(shop_id) ON DELETE CASCADE,
             created_at TIMESTAMP DEFAULT NOW(),
             PRIMARY KEY (user_id, shop_id)
@@ -366,15 +365,15 @@ const insertShopTagMap = (data) => {
 };
 
 const insertFavouriteShops = (data) => {
-  const formatted = data.map(({ user_id, product_id, shop_id, created_at }) => [
+  const formatted = data.map(({ user_id, shop_id, created_at }) => [
     user_id,
-    product_id,
+
     shop_id,
     created_at,
   ]);
 
   const query = format(
-    `INSERT INTO favourite_shops (user_id, product_id,shop_id, created_at)
+    `INSERT INTO favourite_shops (user_id,shop_id, created_at)
      VALUES %L RETURNING *;`,
     formatted
   );

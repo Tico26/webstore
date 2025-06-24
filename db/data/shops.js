@@ -2,8 +2,8 @@ module.exports = [
   {
     id: 1,
     shop_name: "LaMona Vintage",
-    description: "A curated vintage fashion boutique.",
-    url: "https://lamona.example.com",
+    shop_description: "A curated vintage fashion boutique.",
+    shop_url: "https://lamona.example.com",
     logo_url: "https://lamona.example.com/logo.png",
     source_type: "scraped",
     location: "Manchester",
@@ -14,8 +14,8 @@ module.exports = [
   {
     id: 2,
     shop_name: "Retro Revival",
-    description: "Nostalgic clothing for the modern wardrobe.",
-    url: "https://retrorevival.example.com",
+    shop_description: "Nostalgic clothing for the modern wardrobe.",
+    shop_url: "https://retrorevival.example.com",
     logo_url: "https://retrorevival.example.com/logo.png",
     location: "London",
     source_type: "api",

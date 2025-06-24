@@ -1,7 +1,10 @@
 module.exports = [
   {
     id: 1,
+    first_name: "Bruno",
+    last_name: "Jauad",
     email: "user1@example.com",
+    date_of_birth: "2000-12-12",
     username: "vintagequeen",
     password_hash: "hashedpw1",
     created_at: new Date(),
@@ -10,7 +13,10 @@ module.exports = [
   },
   {
     id: 2,
+    first_name: "Chanelle",
+    last_name: "Williams",
     email: "user2@example.com",
+    date_of_birth: "1999-12-12",
     username: "retrofella",
     password_hash: "hashedpw2",
     created_at: new Date(),

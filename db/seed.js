@@ -15,110 +15,114 @@ const seed = ({
   reviews,
   productImages,
 }) => {
-  return db
-    .query(
+  return (
+    db
+      .query(
+        `
+        DROP TABLE IF EXISTS favourite_shops;
       `
-        DROP TABLE IF EXISTS reviews;
-      `
-    )
-    .then(() => {
-      return db.query(`
-                    DROP TABLE IF EXISTS favourite_shops;
-            `);
-    })
-    .then(() => {
-      return db.query(`
-                      DROP TABLE IF EXISTS product_images;
+      )
+      .then(() => {
+        return db.query(`
+        DROP TABLE IF EXISTS product_images;
+    `);
+      })
+      .then(() => {
+        return db.query(`
+        DROP TABLE IF EXISTS shop_tag;
+     `);
+      })
+      .then(() => {
+        return db.query(`
+        DROP TABLE IF EXISTS favourite_products;`);
+      })
+      .then(() => {
+        return db.query(`
+        DROP TABLE IF EXISTS tags;
+     `);
+      })
+      .then(() => {
+        return db.query(`
+       DROP TABLE IF EXISTS products;
+    `);
+      })
+      .then(() => {
+        return db.query(`
+       DROP TABLE IF EXISTS shops;
               `);
-    })
-    .then(() => {
-      return db.query(`
-                      DROP TABLE IF EXISTS product_tags;
+      })
+      .then(() => {
+        return db.query(`
+        DROP TABLE IF EXISTS categories;
               `);
-    })
-    .then(() => {
-      return db.query(`
-                      DROP TABLE IF EXISTS tags;
+      })
+      .then(() => {
+        return db.query(`
+      DROP TABLE IF EXISTS users;
               `);
-    })
-    .then(() => {
-      return db.query(`
-                      DROP TABLE IF EXISTS products;
-              `);
-    })
-    .then(() => {
-      return db.query(`
-                      DROP TABLE IF EXISTS shops;
-              `);
-    })
-    .then(() => {
-      return db.query(`
-                      DROP TABLE IF EXISTS categories;
-              `);
-    })
-    .then(() => {
-      return db.query(`
-                      DROP TABLE IF EXISTS users;
-              `);
-    })
-    .then(() => {
-      return createUsersTable();
-    })
-    .then(() => {
-      return createCategoriesTable();
-    })
-    .then(() => {
-      return createShopsTable();
-    })
-    .then(() => {
-      return createProductsTable();
-    })
-    .then(() => {
-      return createProductImagesTable();
-    })
-    .then(() => {
-      return createTagsTable();
-    })
-    .then(() => {
-      return createShopTagsTable();
-    })
-    .then(() => {
-      return createFavouriteShopsTable();
-    })
-    .then(() => {
-      return createReviewsTable();
-    })
-    .then(() => {
-      return insertUsers(users);
-    })
-    .then(() => {
-      return insertCategories(categories);
-    })
-    .then(() => {
-      return insertShops(shops);
-    })
-    .then(() => {
-      return insertProducts(products);
-    })
-    .then(() => {
-      return insertProductImages(productImages);
-    })
-    .then(() => {
-      return insertShopTag(shopTags);
-    })
-    .then(() => {
-      return insertShopTagMap(shopTagMap);
-    })
-    .then(() => {
-      return insertFavouriteShops(favouriteShops);
-    });
+      })
+      .then(() => {
+        return createUsersTable();
+      })
+      .then(() => {
+        return createCategoriesTable();
+      })
+      .then(() => {
+        return createShopsTable();
+      })
+      .then(() => {
+        return createProductsTable();
+      })
+      .then(() => {
+        return createProductImagesTable();
+      })
+      .then(() => {
+        return createTagsTable();
+      })
+      .then(() => {
+        return createShopTagsTable();
+      })
+      .then(() => {
+        return createFavouriteShopsTable();
+      })
+      // .then(() => {
+      //   return createReviewsTable();
+      // })
+      .then(() => {
+        return insertUsers(users);
+      })
+      .then(() => {
+        return insertCategories(categories);
+      })
+      .then(() => {
+        return insertShops(shops);
+      })
+      .then(() => {
+        return insertProducts(products);
+      })
+      .then(() => {
+        return insertProductImages(productImages);
+      })
+      .then(() => {
+        return insertShopTag(shopTags);
+      })
+      .then(() => {
+        return insertShopTagMap(shopTagMap);
+      })
+      .then(() => {
+        return insertFavouriteShops(favouriteShops);
+      })
+  );
 };
 
 const createUsersTable = () => {
   return db.query(`
           CREATE TABLE users (
             user_id SERIAL PRIMARY KEY,
-            username VARCHAR(100) UNIQUE NOT NULL,
+            first_name VARCHAR(250) NOT NULL,
+            last_name VARCHAR(250) NOT NULL,
+            username VARCHAR(250) UNIQUE NOT NULL,
+            date_of_birth DATE,
             email VARCHAR(255) UNIQUE NOT NULL,
             password_hash VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT NOW(),
@@ -143,8 +147,8 @@ const createShopsTable = () => {
           CREATE TABLE shops (
             shop_id SERIAL PRIMARY KEY,
             shop_name VARCHAR(250) NOT NULL,
-            description VARCHAR(250),
-            url VARCHAR(250) NOT NULL,
+            shop_description VARCHAR(250),
+            shop_url VARCHAR(250) NOT NULL,
             logo_url VARCHAR(250) NOT NULL,
             location VARCHAR(250),
             source_type VARCHAR(250) NOT NULL,
@@ -189,7 +193,7 @@ const createTagsTable = () => {
   return db.query(`
           CREATE TABLE tags (
             tag_id SERIAL PRIMARY KEY,
-            tag_name VARCHAR(100) UNIQUE NOT NULL
+            tag_name VARCHAR(250) UNIQUE NOT NULL
           );
         `);
 };
@@ -230,8 +234,21 @@ const createReviewsTable = () => {
 
 const insertUsers = (data) => {
   const formatted = data.map(
-    ({ username, email, password_hash, created_at, is_admin, last_login }) => [
+    ({
+      first_name,
+      last_name,
       username,
+      date_of_birth,
+      email,
+      password_hash,
+      created_at,
+      is_admin,
+      last_login,
+    }) => [
+      first_name,
+      last_name,
+      username,
+      date_of_birth,
       email,
       password_hash,
       created_at,
@@ -240,7 +257,16 @@ const insertUsers = (data) => {
     ]
   );
   const query = format(
-    `INSERT INTO users (username, email, password_hash, created_at, is_admin, last_login) VALUES %L RETURNING *;`,
+    `INSERT INTO users (
+      first_name,
+      last_name,
+      username,
+      date_of_birth,
+      email,
+      password_hash,
+      created_at,
+      is_admin,
+      last_login) VALUES %L RETURNING *;`,
     formatted
   );
   return db.query(query);
@@ -259,8 +285,8 @@ const insertShops = (data) => {
   const formatted = data.map(
     ({
       shop_name,
-      description,
-      url,
+      shop_description,
+      shop_url,
       logo_url,
       location,
       source_type,
@@ -269,8 +295,8 @@ const insertShops = (data) => {
       category_id,
     }) => [
       shop_name,
-      description,
-      url,
+      shop_description,
+      shop_url,
       logo_url,
       location,
       source_type,
@@ -281,7 +307,16 @@ const insertShops = (data) => {
   );
 
   const query = format(
-    `INSERT INTO shops (shop_name, description, url, logo_url, location, source_type, created_at, updated_at,category_id) VALUES %L RETURNING *;`,
+    `INSERT INTO shops (      
+      shop_name,
+      shop_description,
+      shop_url,
+      logo_url,
+      location,
+      source_type,
+      created_at,
+      updated_at,
+      category_id) VALUES %L RETURNING *;`,
     formatted
   );
   return db.query(query);
@@ -290,7 +325,6 @@ const insertShops = (data) => {
 const insertProducts = (data) => {
   const formatted = data.map(
     ({
-      shop_id,
       product_name,
       product_description,
       price_in_pence,
@@ -300,8 +334,8 @@ const insertProducts = (data) => {
       created_at,
       updated_at,
       is_active,
+      shop_id,
     }) => [
-      shop_id,
       product_name,
       product_description,
       price_in_pence,
@@ -311,11 +345,12 @@ const insertProducts = (data) => {
       created_at,
       updated_at,
       is_active,
+      shop_id,
     ]
   );
   const query = format(
-    `INSERT INTO products (shop_id, product_name, product_description, price_in_pence, 
-    product_url, colour, size, created_at, updated_at, is_active) VALUES %L RETURNING *;`,
+    `INSERT INTO products (product_name, product_description, price_in_pence, 
+    product_url, colour, size, created_at, updated_at, is_active,shop_id) VALUES %L RETURNING *;`,
     formatted
   );
   return db.query(query);

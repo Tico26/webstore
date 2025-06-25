@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon connection.js",
     "setup-dbs": "psql -f ./db/setup.sql",
-    "seed": "NODE_ENV=test node db/run-seed.js"
+    "seed": "NODE_ENV=test node db/run-seed.js",
+    "start": "node listen.js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
   "description": "",
   "dependencies": {
     "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "pg": "^8.16.0",
     "pg-format": "^1.0.4"
   },

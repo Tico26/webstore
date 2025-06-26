@@ -2,7 +2,13 @@ const express = require("express");
 
 const app = express();
 app.use(express.json());
-
+const {
+  getAllCategories,
+  getCategoryById,
+  addCategory,
+  updateCategory,
+  deleteCategory,
+} = require("./controllers/categories.controller");
 const {
   getAllUsers,
   getUserById,
@@ -11,6 +17,14 @@ const {
   updateUser,
   deleteUser,
 } = require("./controllers/users.controller");
+const {
+  getAllShops,
+  getShopById,
+  getShopsByCategory,
+  addShop,
+  updateShop,
+  deleteShop,
+} = require("./controllers/shops.controller");
 
 app.get("/api/users", getAllUsers);
 app.get("/api/users/:user_id", getUserById);
@@ -21,19 +35,19 @@ app.post("/api/user/login", authenticateUser);
 app.patch("/api/users/:user_id", updateUser);
 app.delete("/api/user/:user_id", deleteUser);
 
-// app.get("/api/categories", () => {});
-// app.get("/api/categories/:category_id", () => {});
-// app.post("/api/categories", () => {});
-// app.patch("/api/categories/:category_id", () => {});
-// app.delete("/api/categories/:category_id", () => {});
+app.get("/api/categories", getAllCategories);
+app.get("/api/categories/:category_id", getCategoryById);
+app.post("/api/categories", addCategory);
+app.patch("/api/categories/:category_id", updateCategory);
+app.delete("/api/categories/:category_id", deleteCategory);
 
-// app.get("/api/shops", () => {});
-// app.get("/api/shops/:shop_id", () => {});
+app.get("/api/shops", getAllShops);
+app.get("/api/shops/:shop_id", getShopById);
 // //get all shops from specific category
-// app.get("/api/categories/:category_id/shop");
-// app.post("/api/shops", () => {});
-// app.patch("/api/shops/:shop_id", () => {});
-// app.delete("/api/shops/:shop_id", () => {});
+app.get("/api/categories/:category_id/shop", getShopsByCategory);
+app.post("/api/shops", addShop);
+app.patch("/api/shops/:shop_id", updateShop);
+app.delete("/api/shops/:shop_id", deleteShop);
 
 // app.get("/api/products", () => {});
 // app.get("/api/products/:product_id", () => {});

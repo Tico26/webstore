@@ -5,114 +5,105 @@ const seed = ({
   shops,
   products,
   categories,
-  productCategories,
   shopTags,
   shopTagMap,
-  productColours,
-  productColourMap,
   users,
   favouriteShops,
-  reviews,
   productImages,
 }) => {
-  return (
-    db
-      .query(
-        `
+  return db
+    .query(
+      `
         DROP TABLE IF EXISTS favourite_shops;
       `
-      )
-      .then(() => {
-        return db.query(`
+    )
+    .then(() => {
+      return db.query(`
         DROP TABLE IF EXISTS product_images;
     `);
-      })
-      .then(() => {
-        return db.query(`
+    })
+    .then(() => {
+      return db.query(`
         DROP TABLE IF EXISTS shop_tag;
      `);
-      })
-      .then(() => {
-        return db.query(`
+    })
+    .then(() => {
+      return db.query(`
         DROP TABLE IF EXISTS favourite_products;`);
-      })
-      .then(() => {
-        return db.query(`
+    })
+    .then(() => {
+      return db.query(`
         DROP TABLE IF EXISTS tags;
      `);
-      })
-      .then(() => {
-        return db.query(`
+    })
+    .then(() => {
+      return db.query(`
        DROP TABLE IF EXISTS products;
     `);
-      })
-      .then(() => {
-        return db.query(`
+    })
+    .then(() => {
+      return db.query(`
        DROP TABLE IF EXISTS shops;
               `);
-      })
-      .then(() => {
-        return db.query(`
+    })
+    .then(() => {
+      return db.query(`
         DROP TABLE IF EXISTS categories;
               `);
-      })
-      .then(() => {
-        return db.query(`
+    })
+    .then(() => {
+      return db.query(`
       DROP TABLE IF EXISTS users;
               `);
-      })
-      .then(() => {
-        return createUsersTable();
-      })
-      .then(() => {
-        return createCategoriesTable();
-      })
-      .then(() => {
-        return createShopsTable();
-      })
-      .then(() => {
-        return createProductsTable();
-      })
-      .then(() => {
-        return createProductImagesTable();
-      })
-      .then(() => {
-        return createTagsTable();
-      })
-      .then(() => {
-        return createShopTagsTable();
-      })
-      .then(() => {
-        return createFavouriteShopsTable();
-      })
-      // .then(() => {
-      //   return createReviewsTable();
-      // })
-      .then(() => {
-        return insertUsers(users);
-      })
-      .then(() => {
-        return insertCategories(categories);
-      })
-      .then(() => {
-        return insertShops(shops);
-      })
-      .then(() => {
-        return insertProducts(products);
-      })
-      .then(() => {
-        return insertProductImages(productImages);
-      })
-      .then(() => {
-        return insertShopTag(shopTags);
-      })
-      .then(() => {
-        return insertShopTagMap(shopTagMap);
-      })
-      .then(() => {
-        return insertFavouriteShops(favouriteShops);
-      })
-  );
+    })
+    .then(() => {
+      return createUsersTable();
+    })
+    .then(() => {
+      return createCategoriesTable();
+    })
+    .then(() => {
+      return createShopsTable();
+    })
+    .then(() => {
+      return createProductsTable();
+    })
+    .then(() => {
+      return createProductImagesTable();
+    })
+    .then(() => {
+      return createTagsTable();
+    })
+    .then(() => {
+      return createShopTagsTable();
+    })
+    .then(() => {
+      return createFavouriteShopsTable();
+    })
+    .then(() => {
+      return insertUsers(users);
+    })
+    .then(() => {
+      return insertCategories(categories);
+    })
+    .then(() => {
+      return insertShops(shops);
+    })
+    .then(() => {
+      return insertProducts(products);
+    })
+    .then(() => {
+      return insertProductImages(productImages);
+    })
+    .then(() => {
+      return insertShopTag(shopTags);
+    })
+    .then(() => {
+      return insertShopTagMap(shopTagMap);
+    })
+    .then(() => {
+      return insertFavouriteShops(favouriteShops);
+    });
 };
 
 const createUsersTable = () => {
@@ -219,19 +210,6 @@ const createFavouriteShopsTable = () => {
         `);
 };
 
-const createReviewsTable = () => {
-  return db.query(`
-          CREATE TABLE reviews (
-            review_id SERIAL PRIMARY KEY,
-            product_id INT REFERENCES products(product_id) ON DELETE CASCADE,
-            user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
-            rating INT CHECK (rating >= 1 AND rating <= 5),
-            comment TEXT,
-            created_at TIMESTAMP DEFAULT NOW()
-          );
-        `);
-};
-
 const insertUsers = (data) => {
   const formatted = data.map(
     ({
@@ -273,7 +251,10 @@ const insertUsers = (data) => {
 };
 
 const insertCategories = (data) => {
-  const formatted = data.map(({ name, slug }) => [name, slug]);
+  const formatted = data.map(({ category_name, slug }) => [
+    category_name,
+    slug,
+  ]);
   const query = format(
     `INSERT INTO categories (category_name, category_description) VALUES %L RETURNING *;`,
     formatted

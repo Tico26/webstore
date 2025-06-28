@@ -7,7 +7,7 @@
     "dev": "nodemon connection.js",
     "setup-dbs": "psql -f ./db/setup.sql",
     "seed": "NODE_ENV=test node db/run-seed.js",
-    "start": "node listen.js"
+    "start": "nodemon listen.js"
   },
   "keywords": [],
   "author": "",

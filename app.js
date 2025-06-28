@@ -25,6 +25,15 @@ const {
   updateShop,
   deleteShop,
 } = require("./controllers/shops.controller");
+const {
+  getAllProducts,
+  getProductById,
+  getProductsFromSpecificShop,
+  addProduct,
+  updateProduct,
+
+  deleteProduct,
+} = require("./controllers/products.controller");
 
 app.get("/api/users", getAllUsers);
 app.get("/api/users/:user_id", getUserById);
@@ -49,13 +58,13 @@ app.post("/api/shops", addShop);
 app.patch("/api/shops/:shop_id", updateShop);
 app.delete("/api/shops/:shop_id", deleteShop);
 
-// app.get("/api/products", () => {});
-// app.get("/api/products/:product_id", () => {});
+app.get("/api/products", getAllProducts);
+app.get("/api/products/:product_id", getProductById);
 // //get all products from specific shop
-// app.get("/api/products/:product_id/shop");
-// app.post("/api/products", () => {});
-// app.patch("/api/products/:product_id", () => {});
-// app.delete("/api/products/:product_id", () => {});
+app.get("/api/products/:shop_id/shop", getProductsFromSpecificShop);
+app.post("/api/products", addProduct);
+app.patch("/api/products/:product_id", updateProduct);
+app.delete("/api/products/:product_id", deleteProduct);
 
 // //image apis
 // app.get("api/products/:image_id/image", () => {});

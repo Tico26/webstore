@@ -50,6 +50,12 @@ const {
   removeTagFromShop,
 } = require("./controllers/tags.controller");
 
+const {
+  getFavouriteShop,
+  addFavouriteShop,
+  removeFavouriteShop,
+} = require("./controllers/favourites.controller");
+
 app.get("/api/users", getAllUsers);
 app.get("/api/users/:user_id", getUserById);
 // //register user
@@ -98,7 +104,7 @@ app.delete("/api/tags/:tag_id", deleteTag);
 app.delete("/api/shops/:shop_id/:tag_id", removeTagFromShop);
 
 // //favourite shops api
-// app.get("/api/users/:id/favourites/shops", () => {});
-// app.post("/api/favourites/shops", () => {});
-// app.delete("/api/favourites/shops/:shopId", () => {});
+app.get("/api/users/:user_id/favourites/shops", getFavouriteShop);
+app.post("/api/favourites/shops", addFavouriteShop);
+app.delete("/api/favourites/shops/:shop_id", removeFavouriteShop);
 module.exports = { app };

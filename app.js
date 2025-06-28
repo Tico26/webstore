@@ -39,6 +39,17 @@ const {
   addImage,
   deleteImage,
 } = require("./controllers/image.controller");
+
+const {
+  getAllTags,
+  getAllTagsFromSpecificShop,
+  createTag,
+  addTagToShop,
+  updateTag,
+  deleteTag,
+  removeTagFromShop,
+} = require("./controllers/tags.controller");
+
 app.get("/api/users", getAllUsers);
 app.get("/api/users/:user_id", getUserById);
 // //register user
@@ -75,16 +86,16 @@ app.get("/api/products/:image_id/image", getImage);
 app.post("/api/products/:image_id/image", addImage);
 app.delete("/api/product-images/:image_id", deleteImage);
 
-// app.get("/api/tags", () => {});
+app.get("/api/tags", getAllTags);
 // //get all tags from a shop
-// app.get("/api/shops/:shop_id/tags", () => {});
-// app.post("/api/tags", () => {});
+app.get("/api/shops/:shop_id/tags", getAllTagsFromSpecificShop);
+app.post("/api/tags", createTag);
 // //add tag to shop
-// app.post("/api/shops/:tag_id/tags", () => {});
-// app.patch("api/tags/:tag_id", () => {});
-// app.delete("/api/tags/:tag_id", () => {});
+app.post("/api/shops/:tag_id/tags", addTagToShop);
+app.patch("/api/tags/:tag_id", updateTag);
+app.delete("/api/tags/:tag_id", deleteTag);
 // //remove tag from shops
-// app.delete("/api/shops/:shop_id/:tag_id", () => {});
+app.delete("/api/shops/:shop_id/:tag_id", removeTagFromShop);
 
 // //favourite shops api
 // app.get("/api/users/:id/favourites/shops", () => {});

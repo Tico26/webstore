@@ -1,4 +1,10 @@
-const { fetchAllUsers } = require("../models/users.model");
+const {
+  fetchAllUsers,
+  fetchUserById,
+  postUser,
+  authenticateUserModel,
+  removeUser,
+} = require("../models/users.model");
 
 exports.getAllUsers = async (req, res, next) => {
   try {
@@ -12,7 +18,8 @@ exports.getAllUsers = async (req, res, next) => {
 exports.getUserById = async (req, res, next) => {
   try {
     const { user_id } = req.params;
-    console.log(`reached user: ${user_id}`);
+    const user = await fetchUserById(user_id);
+    res.status(200).send({ user });
   } catch (err) {
     next(err);
   }
@@ -27,12 +34,18 @@ exports.addUser = async (req, res, next) => {
       date_of_birth,
       username,
       password_hash,
-      created_at,
       is_admin,
-      last_login,
     } = req.body;
-    console.log(first_name);
-    res.status(201).send("reached add");
+    const user = await postUser(
+      first_name,
+      last_name,
+      email,
+      date_of_birth,
+      username,
+      password_hash,
+      is_admin
+    );
+    res.status(201).send({ user });
   } catch (err) {
     next(err);
   }
@@ -40,9 +53,9 @@ exports.addUser = async (req, res, next) => {
 
 exports.authenticateUser = async (req, res, next) => {
   try {
-    const { email, password_hash } = req.body;
-    console.log(email);
-    res.status(201).send(email);
+    const { email, username, password_hash } = req.body;
+    authenticateUserModel(email, username, password_hash);
+    res.status(200).send("Successful login");
   } catch (err) {
     next(err);
   }
@@ -51,9 +64,25 @@ exports.authenticateUser = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
   try {
     const { user_id } = req.params;
-    const { first_name } = req.body;
-    console.log(first_name);
-    res.status(201).send({ first_name });
+    const {
+      first_name,
+      last_name,
+      email,
+      date_of_birth,
+      username,
+      password_hash,
+      is_admin,
+    } = req.body;
+
+    res.status(200).send({
+      first_name,
+      last_name,
+      email,
+      date_of_birth,
+      username,
+      password_hash,
+      is_admin,
+    });
   } catch (err) {
     next(err);
   }
@@ -62,8 +91,8 @@ exports.updateUser = async (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
   try {
     const { user_id } = req.params;
-    console.log(`reached delete`);
-    res.status(201).send(`succefully deleted: ${user_id}`);
+    await removeUser(user_id);
+    res.status(200).send(`Succefully Deleted User: ${user_id}`);
   } catch (err) {
     next(err);
   }

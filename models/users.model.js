@@ -10,7 +10,7 @@ exports.fetchUserById = (userId) => {
   return db
     .query(
       `SELECT * FROM users
-                  WHERE user_id=$1;`,
+       WHERE user_id=$1;`,
       [userId]
     )
     .then(({ rows }) => {
@@ -107,9 +107,5 @@ exports.patchUser = (
     });
 };
 exports.removeUser = (userId) => {
-  return db.query(
-    `
-    DELETE FROM users WHERE user_id = $1`,
-    [userId]
-  );
+  return db.query(`DELETE FROM users WHERE user_id = $1`, [userId]);
 };

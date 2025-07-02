@@ -1,7 +1,9 @@
+const { fetchAllUsers } = require("../models/users.model");
+
 exports.getAllUsers = async (req, res, next) => {
   try {
-    console.log("All users");
-    return;
+    const allUsers = await fetchAllUsers();
+    res.status(200).send({ allUsers });
   } catch (err) {
     next(err);
   }

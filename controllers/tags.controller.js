@@ -1,5 +1,6 @@
 exports.getAllTags = async (req, res, next) => {
   try {
+    
     res.status(201).send(`Got tags`);
   } catch (err) {
     next(err);

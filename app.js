@@ -89,7 +89,7 @@ app.delete("/api/products/:product_id", deleteProduct);
 
 // //image apis
 app.get("/api/products/:image_id/image", getImage);
-app.post("/api/products/:image_id/image", addImage);
+app.post("/api/products/:product_id/image", addImage);
 app.delete("/api/product-images/:image_id", deleteImage);
 
 app.get("/api/tags", getAllTags);

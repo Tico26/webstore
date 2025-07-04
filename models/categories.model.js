@@ -32,3 +32,11 @@ return db.query(
     return rows[0]
 });
 };
+
+exports.patchCategories = ()=>{
+
+}
+
+exports.deleteCategories = ()=>{
+  
+}

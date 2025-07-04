@@ -1,6 +1,13 @@
+const {
+  postCategories,
+  fetchCategoryById,
+  fetchAllCategories,
+} = require("../models/categories.model");
+
 exports.getAllCategories = async (req, res, next) => {
   try {
-    res.status(201).send("reached all categories");
+    const allCategories = await fetchAllCategories();
+    res.status(200).send({ allCategories });
   } catch (err) {
     next(err);
   }
@@ -9,7 +16,8 @@ exports.getAllCategories = async (req, res, next) => {
 exports.getCategoryById = async (req, res, next) => {
   try {
     const { category_id } = req.params;
-    res.status(201).send(`you've reached category: ${category_id}`);
+    const categories = await fetchCategoryById(category_id);
+    res.status(200).send(`${categories}`);
   } catch (err) {
     next(err);
   }
@@ -18,7 +26,8 @@ exports.getCategoryById = async (req, res, next) => {
 exports.addCategory = async (req, res, next) => {
   try {
     const { category_name, slug } = req.body;
-    res.status(201).send(`you've posted category: ${category_name}`);
+    const category = await postCategories(category_name, slug);
+    res.status(201).send({ category });
   } catch (err) {
     next(err);
   }

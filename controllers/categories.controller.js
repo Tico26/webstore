@@ -2,6 +2,7 @@ const {
   postCategories,
   fetchCategoryById,
   fetchAllCategories,
+  patchCategories,
 } = require("../models/categories.model");
 
 exports.getAllCategories = async (req, res, next) => {
@@ -37,18 +38,19 @@ exports.updateCategory = async (req, res, next) => {
   try {
     const { category_id } = req.params;
     const { category_name, slug } = req.body;
-    res.status(201).send(`you've updated category: ${category_name}`);
+    const category = await patchCategories(category_id, category_name, slug);
+    res.status(201).send({ category });
   } catch (err) {
     next(err);
   }
 };
 
-exports.deleteCategory = async (req, res, next) => {
-  try {
-    const { category_id } = req.params;
-    const { category_name, slug } = req.body;
-    res.status(201).send(`you've deleted category: ${category_name}`);
-  } catch (err) {
-    next(err);
-  }
-};
+// exports.deleteCategory = async (req, res, next) => {
+//   try {
+//     const { category_id } = req.params;
+//     const { category_name, slug } = req.body;
+//     res.status(201).send({`you've deleted category: ${category_name}`});
+//   } catch (err) {
+//     next(err);
+//   }
+// };

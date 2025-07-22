@@ -71,13 +71,13 @@ app.post("/api/categories", addCategory);
 app.patch("/api/categories/:category_id", updateCategory);
 app.delete("/api/categories/:category_id", deleteCategory);
 
-// app.get("/api/shops", getAllShops);
-// app.get("/api/shops/:shop_id", getShopById);
-// // //get all shops from specific category
-// app.get("/api/categories/:category_id/shop", getShopsByCategory);
-// app.post("/api/shops", addShop);
-// app.patch("/api/shops/:shop_id", updateShop);
-// app.delete("/api/shops/:shop_id", deleteShop);
+app.get("/api/shops", getAllShops);
+app.get("/api/shops/:shop_id", getShopById);
+// //get all shops from specific category
+app.get("/api/categories/:category_id/shops", getShopsByCategory);
+app.post("/api/shops", addShop);
+app.patch("/api/shops/:shop_id", updateShop);
+app.delete("/api/shops/:shop_id", deleteShop);
 
 // app.get("/api/products", getAllProducts);
 // app.get("/api/products/:product_id", getProductById);

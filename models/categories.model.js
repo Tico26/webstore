@@ -1,5 +1,4 @@
 const db = require("../db/connection.js");
-const categories = require("../db/data/categories.js");
 
 exports.fetchAllCategories = () => {
   console.log("hit models");
@@ -51,4 +50,11 @@ exports.patchCategories = (category_id, category_name, slug) => {
     });
 };
 
-exports.deleteCategories = () => {};
+exports.removeCategory = (categoryId) => {
+  return db.query(
+    `
+    DELETE FROM categories 
+    WHERE category_id=$1`,
+    [categoryId]
+  );
+};

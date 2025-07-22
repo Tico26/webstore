@@ -3,6 +3,7 @@ const {
   fetchCategoryById,
   fetchAllCategories,
   patchCategories,
+  removeCategory,
 } = require("../models/categories.model");
 
 exports.getAllCategories = async (req, res, next) => {
@@ -45,12 +46,12 @@ exports.updateCategory = async (req, res, next) => {
   }
 };
 
-// exports.deleteCategory = async (req, res, next) => {
-//   try {
-//     const { category_id } = req.params;
-//     const { category_name, slug } = req.body;
-//     res.status(201).send({`you've deleted category: ${category_name}`});
-//   } catch (err) {
-//     next(err);
-//   }
-// };
+exports.deleteCategory = async (req, res, next) => {
+  try {
+    const { category_id } = req.params;
+    await removeCategory(category_id);
+    res.status(201).send(`Successfully deleted ${category_id}`);
+  } catch (err) {
+    next(err);
+  }
+};

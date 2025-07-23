@@ -1,4 +1,8 @@
-const { fetchImage, removeImage } = require("../models/productImages.model");
+const {
+  fetchImage,
+  removeImage,
+  postImage,
+} = require("../models/productImages.model");
 
 exports.getImage = async (req, res, next) => {
   try {
@@ -12,16 +16,9 @@ exports.getImage = async (req, res, next) => {
 
 exports.addImage = async (req, res, next) => {
   try {
-    const { image_id } = req.params;
-    const { product_id, image_url, alt_text, sort_order } = req.body;
-    const image = await postImage(
-      image_id,
-      product_id,
-      image_url,
-      alt_text,
-      sort_order
-    );
-
+    const { product_id } = req.params;
+    const { image_url, alt_text, sort_order } = req.body;
+    const image = await postImage(product_id, image_url, alt_text, sort_order);
     res.status(201).send({ image });
   } catch (err) {
     next(err);

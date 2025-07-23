@@ -88,7 +88,7 @@ app.patch("/api/products/:product_id", updateProduct);
 app.delete("/api/products/:product_id", deleteProduct);
 
 // // //image apis
-// app.get("/api/products/:image_id/image", getImage);
+app.get("/api/products/:image_id/image", getImage);
 // app.post("/api/products/:product_id/image", addImage);
 // app.delete("/api/product-images/:image_id", deleteImage);
 

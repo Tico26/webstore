@@ -1,14 +1,14 @@
 const db = require("../db/connection.js");
 
-exports.fetchImage = (imageId)=>{
+exports.fetchFavouriteShop = (imageId)=>{
 
 }
 
-exports.postImage = (productId)=>{
+exports.postFavouriteShop = (productId)=>{
 
 }
 
-exports.deleteImage = (imageId)=>{
+exports.removeFavouriteShop = (imageId)=>{
 
 }
 

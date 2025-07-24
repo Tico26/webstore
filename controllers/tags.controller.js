@@ -1,16 +1,23 @@
+const {
+  fetchAllTags,
+  fetchTagsFromShop,
+  postTag,
+  postTagToShop,
+} = require("../models/tags.model");
 exports.getAllTags = async (req, res, next) => {
   try {
-    
-    res.status(201).send(`Got tags`);
+    const allTags = await fetchAllTags();
+    res.status(201).send({ allTags });
   } catch (err) {
     next(err);
   }
 };
 
-exports.getAllTagsFromSpecificShop = async (req, res, next) => {
+exports.getTagFromShop = async (req, res, next) => {
   try {
     const { shop_id } = req.params;
-    res.status(201).send(`Got tags from shop: ${shop_id}`);
+    const allTags = await fetchTagsFromShop(shop_id);
+    res.status(200).send({ allTags });
   } catch (err) {
     next(err);
   }
@@ -19,7 +26,8 @@ exports.getAllTagsFromSpecificShop = async (req, res, next) => {
 exports.createTag = async (req, res, next) => {
   try {
     const { tag_name } = req.body;
-    res.status(201).send(`Created tag: ${tag_name}`);
+    const tag = await postTag(tag_name);
+    res.status(201).send({ tag });
   } catch (err) {
     next(err);
   }
@@ -29,7 +37,8 @@ exports.addTagToShop = async (req, res, next) => {
   try {
     const { tag_id } = req.params;
     const { shop_id } = req.body;
-    res.status(201).send(`Added tag: ${tag_id} to shop: ${shop_id}`);
+    const tag = await postTagToShop(tag_id, shop_id);
+    res.status(201).send(tag);
   } catch (err) {
     next(err);
   }

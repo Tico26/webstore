@@ -42,7 +42,7 @@ const {
 
 const {
   getAllTags,
-  getAllTagsFromSpecificShop,
+  getTagFromShop,
   createTag,
   addTagToShop,
   updateTag,
@@ -92,12 +92,12 @@ app.get("/api/products/:image_id/image", getImage);
 // app.post("/api/products/:product_id/image", addImage);
 app.delete("/api/product-images/:image_id", deleteImage);
 
-// app.get("/api/tags", getAllTags);
-// // //get all tags from a shop
-// app.get("/api/shops/:shop_id/tags", getAllTagsFromSpecificShop);
-// app.post("/api/tags", createTag);
+app.get("/api/tags", getAllTags);
+//get all tags from a shop
+app.get("/api/shops/:shop_id/tags", getTagFromShop);
+app.post("/api/tags", createTag);
 // // //add tag to shop
-// app.post("/api/shops/:tag_id/tags", addTagToShop);
+app.post("/api/tags/:tag_id/shops", addTagToShop);
 // app.patch("/api/tags/:tag_id", updateTag);
 // app.delete("/api/tags/:tag_id", deleteTag);
 // // //remove tag from shops

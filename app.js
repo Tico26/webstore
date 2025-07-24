@@ -99,7 +99,7 @@ app.post("/api/tags", createTag);
 // // //add tag to shop
 app.post("/api/tags/:tag_id/shops", addTagToShop);
 app.patch("/api/tags/:tag_id", updateTag);
-// app.delete("/api/tags/:tag_id", deleteTag);
+app.delete("/api/tags/:tag_id", deleteTag);
 // // //remove tag from shops
 // app.delete("/api/shops/:shop_id/:tag_id", removeTagFromShop);
 

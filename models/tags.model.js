@@ -63,6 +63,8 @@ exports.patchTag = (tagId, tagName) => {
     });
 };
 
-exports.removeTag = () => {};
+exports.removeTag = (tagId) => {
+  return db.query(`DELETE FROM tags WHERE tag_id = $1`, [tagId]);
+};
 
 exports.removeTagFromShop = () => {};

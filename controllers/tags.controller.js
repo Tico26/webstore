@@ -4,6 +4,7 @@ const {
   postTag,
   postTagToShop,
   patchTag,
+  removeTag,
 } = require("../models/tags.model");
 exports.getAllTags = async (req, res, next) => {
   try {
@@ -59,6 +60,7 @@ exports.updateTag = async (req, res, next) => {
 exports.deleteTag = async (req, res, next) => {
   try {
     const { tag_id } = req.params;
+    await removeTag(tag_id);
     res.status(201).send(`Deleted tag: ${tag_id}`);
   } catch (err) {
     next(err);

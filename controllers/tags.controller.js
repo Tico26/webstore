@@ -3,6 +3,7 @@ const {
   fetchTagsFromShop,
   postTag,
   postTagToShop,
+  patchTag,
 } = require("../models/tags.model");
 exports.getAllTags = async (req, res, next) => {
   try {
@@ -48,7 +49,8 @@ exports.updateTag = async (req, res, next) => {
   try {
     const { tag_id } = req.params;
     const { tag_name } = req.body;
-    res.status(201).send(`Updated tag: ${tag_id} to ${tag_name}`);
+    const tag = await patchTag(tag_id, tag_name);
+    res.status(200).send({ tag });
   } catch (err) {
     next(err);
   }

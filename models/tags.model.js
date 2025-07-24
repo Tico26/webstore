@@ -48,7 +48,20 @@ exports.postTagToShop = (tagId, shopId) => {
     });
 };
 
-exports.updateTag = () => {};
+exports.patchTag = (tagId, tagName) => {
+  return db
+    .query(
+      `Update tags
+      SET
+      tag_name=$1
+      WHERE tag_id=$2 
+      RETURNING *`,
+      [tagName, tagId]
+    )
+    .then(({ rows }) => {
+      return rows;
+    });
+};
 
 exports.removeTag = () => {};
 

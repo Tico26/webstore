@@ -4,3 +4,4 @@ node_modules
 check-tables.sql
 setup.sql
 showTables.sql
+services

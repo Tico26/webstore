@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup-dbs": "psql -f ./db/setup.sql",
-    "seed": "NODE_ENV=test node db/run-seed.js",
-    "start": "NODE_ENV=test nodemon listen.js"
+    "seed": "NODE_ENV=production node db/run-seed.js",
+    "start": "NODE_ENV=production nodemon listen.js"
   },
   "keywords": [],
   "author": "",

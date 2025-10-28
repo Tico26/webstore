@@ -1,6 +1,13 @@
 const express = require("express");
-
+const { getApi } = require("./controllers/api.controller");
 const app = express();
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 app.use(express.json());
 const {
   getAllCategories,
@@ -55,6 +62,8 @@ const {
   addFavouriteShop,
   removeFavouriteShop,
 } = require("./controllers/favourites.controller");
+
+app.get("/api", getApi);
 
 app.get("/api/users", getAllUsers);
 app.get("/api/users/:user_id", getUserById);

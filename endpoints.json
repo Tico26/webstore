@@ -1,6 +1,6 @@
 {
   "GET /api": {
-    "description": "serves up a json representation of all the available endpoints of the api"
+    "description": "serves a json representation of all the available endpoints of the api"
   },
   "GET /api/users": {
     "description": "serves an array of all users",
@@ -95,5 +95,25 @@
       "user_id": 1
     },
     "exampleResponse": "Successfully Deleted User: 1"
+  },
+  "GET /api/categories": {
+    "description": "serves a json representation of all categories",
+    "queries": [],
+    "exampleResponse": {
+      "allCategories": {
+        "allCategories": [
+          {
+            "category_id": 322,
+            "category_name": "category_name_example_1",
+            "category_description": "category_name_description_1"
+          },
+          {
+            "category_id": 294,
+            "category_name": "category_name_example_2",
+            "category_description": "category_name_description_2"
+          }
+        ]
+      }
+    }
   }
 }

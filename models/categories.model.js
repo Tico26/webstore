@@ -18,15 +18,15 @@ exports.fetchCategoryById = (categoryId) => {
     });
 };
 
-exports.postCategories = (category_name, slug) => {
+exports.postCategories = (category_name, category_description) => {
   return db
     .query(
       `INSERT INTO categories
-  (category_name,
-    slug) 
-    VALUES ($1,$2)
-    RETURNING *`,
-      [category_name, slug]
+        (category_name,
+        category_description) 
+        VALUES ($1,$2)
+        RETURNING *`,
+      [category_name, category_description]
     )
     .then(({ rows }) => {
       return rows[0];

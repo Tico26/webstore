@@ -27,8 +27,8 @@ exports.getCategoryById = async (req, res, next) => {
 
 exports.addCategory = async (req, res, next) => {
   try {
-    const { category_name, slug } = req.body;
-    const category = await postCategories(category_name, slug);
+    const { category_name, category_description } = req.body;
+    const category = await postCategories(category_name, category_description);
     res.status(201).send({ category });
   } catch (err) {
     next(err);

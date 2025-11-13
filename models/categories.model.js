@@ -1,8 +1,6 @@
 const db = require("../db/connection.js");
 
 exports.fetchAllCategories = () => {
-  console.log("hit models");
-
   return db.query(`SELECT * FROM categories;`).then(({ rows }) => {
     return rows;
   });

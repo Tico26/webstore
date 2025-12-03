@@ -33,15 +33,15 @@ exports.postCategories = (category_name, category_description) => {
     });
 };
 
-exports.patchCategories = (category_id, category_name, slug) => {
+exports.patchCategories = (categoryId, categoryName, categoryDescription) => {
   return db
     .query(
       `UPDATE categories
         SET category_name=$1,
-        slug=$2
+        category_description=$2
         WHERE category_id=$3
         RETURNING *`,
-      [category_name, slug, category_id]
+      [categoryName, categoryDescription, categoryId]
     )
     .then(({ rows }) => {
       return rows[0];

@@ -91,7 +91,7 @@
   "DELETE /api/user/:user_id": {
     "description": "deletes a single user",
     "queries": ["user_id"],
-    "requestBody": {
+    "requestParam": {
       "user_id": 1
     },
     "exampleResponse": "Successfully Deleted User: 1"
@@ -100,20 +100,52 @@
     "description": "serves a json representation of all categories",
     "queries": [],
     "exampleResponse": {
-      "allCategories": {
-        "allCategories": [
-          {
-            "category_id": 322,
-            "category_name": "category_name_example_1",
-            "category_description": "category_name_description_1"
-          },
-          {
-            "category_id": 294,
-            "category_name": "category_name_example_2",
-            "category_description": "category_name_description_2"
-          }
-        ]
-      }
+      "allCategories": [
+        {
+          "category_id": 322,
+          "category_name": "category_name_example_1",
+          "category_description": "category_name_description_1"
+        },
+        {
+          "category_id": 294,
+          "category_name": "category_name_example_2",
+          "category_description": "category_name_description_2"
+        }
+      ]
     }
+  },
+  "POST /api/categories": {
+    "description": "creates a category in the database",
+    "queries": ["category_name", "category_description"],
+    "exampleResponse": {
+      "category": [
+        {
+          "category_id": 5,
+          "category_name": "category_name_example",
+          "category_description": "category_description_example"
+        }
+      ]
+    }
+  },
+  "PATCH /api/categories/:category_id": {
+    "description": "updates a category in the database according to its ID",
+    "queries": ["category_id", "category_name", "category_description"],
+    "exampleResponse": {
+      "category": [
+        {
+          "category_id": 1,
+          "category_name": "updated_category_name",
+          "category_description": "updated_category_description"
+        }
+      ]
+    }
+  },
+  "DELETE /api/categories/:category_id": {
+    "description": "deletes a single category according to its ID",
+    "queries": ["category_id"],
+    "requestParam": {
+      "category_id": 1
+    },
+    "exampleResponse": "Successfully Deleted 1"
   }
 }

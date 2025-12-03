@@ -19,7 +19,7 @@ exports.getCategoryById = async (req, res, next) => {
   try {
     const { category_id } = req.params;
     const categories = await fetchCategoryById(category_id);
-    res.status(200).send(`${categories}`);
+    res.status(200).send({ categories });
   } catch (err) {
     next(err);
   }
@@ -38,8 +38,12 @@ exports.addCategory = async (req, res, next) => {
 exports.updateCategory = async (req, res, next) => {
   try {
     const { category_id } = req.params;
-    const { category_name, slug } = req.body;
-    const category = await patchCategories(category_id, category_name, slug);
+    const { category_name, category_description } = req.body;
+    const category = await patchCategories(
+      category_id,
+      category_name,
+      category_description
+    );
     res.status(201).send({ category });
   } catch (err) {
     next(err);

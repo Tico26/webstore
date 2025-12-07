@@ -290,5 +290,168 @@
       "shop_id": 1
     },
     "exampleResponse": "succefully deleted shop with id: 1"
+  },
+  "GET /api/products": {
+    "description": "serves an array of all products",
+    "queries": [],
+    "exampleResponse": {
+      "getAllProducts": [
+        {
+          "product_id": 2,
+          "product_name": "product_name_1_example",
+          "product_description": "product_description_1_example",
+          "price_in_pence": null,
+          "product_url": "product_description_1_example",
+          "colour": "product_colour_1_example",
+          "size": "product_size_1_example",
+          "created_at": "2025-09-01T19:58:27.453Z",
+          "updated_at": "2025-09-01T19:58:27.453Z",
+          "is_active": true,
+          "shop_id": 2
+        },
+        {
+          "product_id": 1,
+          "product_name": "product_name_2_example",
+          "product_description": "product_description_2_example",
+          "price_in_pence": null,
+          "product_url": "product_description_2_example",
+          "colour": "product_colour_2_example",
+          "size": "product_size_2_example",
+          "created_at": "2025-09-01T19:58:27.453Z",
+          "updated_at": "2025-09-01T19:58:27.453Z",
+          "is_active": true,
+          "shop_id": 1
+        }
+      ]
+    }
+  },
+  "GET /api/products/:product_id": {
+    "description": "serves single product according to its ID",
+    "queries": [],
+    "exampleResponse": {
+      "product": [
+        {
+          "product_id": 2,
+          "product_name": "product_name_1_example",
+          "product_description": "product_description_1_example",
+          "price_in_pence": null,
+          "product_url": "product_description_1_example",
+          "colour": "product_colour_1_example",
+          "size": "product_size_1_example",
+          "created_at": "2025-09-01T19:58:27.453Z",
+          "updated_at": "2025-09-01T19:58:27.453Z",
+          "is_active": true,
+          "shop_id": 2
+        }
+      ]
+    }
+  },
+  "GET /api/products/:shop_id/shop": {
+    "description": "serves array of products according to their shop id",
+    "queries": [],
+    "exampleResponse": {
+      "product": [
+        {
+          "product_id": 2,
+          "product_name": "product_name_example_1",
+          "product_description": "product_description_example_1",
+          "price_in_pence": null,
+          "product_url": "https://example.com/item/2",
+          "colour": "Red",
+          "size": "S",
+          "created_at": "2025-09-01T19:58:27.453Z",
+          "updated_at": "2025-09-01T19:58:27.453Z",
+          "is_active": true,
+          "shop_id": 2
+        },
+        {
+          "product_id": 3,
+          "product_name": "product_description_example_2",
+          "product_description": "product_description_example_2",
+          "price_in_pence": null,
+          "product_url": "https://retrorevival.example.com/item/2",
+          "colour": "Red",
+          "size": "S",
+          "created_at": "2025-12-07T15:45:06.684Z",
+          "updated_at": "2025-12-07T15:45:06.684Z",
+          "is_active": true,
+          "shop_id": 2
+        }
+      ]
+    }
+  },
+  "POST /api/products": {
+    "description": "creates a new product",
+    "queries": [
+      "product_id",
+      "product_name",
+      "product_description",
+      "price_in_pence",
+      "product_url",
+      "colour",
+      "size",
+      "created_at",
+      "updated_at",
+      "is_active",
+      "shop_id"
+    ],
+    "exampleResponse": {
+      "product": [
+        {
+          "product_id": 5,
+          "product_name": "product_name_example",
+          "product_description": "product_description_example",
+          "price_in_pence": null,
+          "product_url": "https://example.com/item/2",
+          "colour": "Red",
+          "size": "S",
+          "created_at": "2025-12-07T16:53:51.443Z",
+          "updated_at": "2025-12-07T16:53:51.443Z",
+          "is_active": true,
+          "shop_id": 3
+        }
+      ]
+    }
+  },
+  "PATCH /api/products": {
+    "description": "updates a product by its ID",
+    "queries": [
+      "product_id",
+      "product_name",
+      "product_description",
+      "price_in_pence",
+      "product_url",
+      "colour",
+      "size",
+      "created_at",
+      "updated_at",
+      "is_active",
+      "shop_id"
+    ],
+    "exampleResponse": {
+      "product": [
+        {
+          "product_id": 5,
+          "product_name": "updated_product_name_example",
+          "product_description": "updated_product_description_example",
+          "price_in_pence": null,
+          "product_url": "https://example.com/item/2",
+          "colour": "Red",
+          "size": "S",
+          "created_at": "2025-12-07T16:53:51.443Z",
+          "updated_at": "2025-12-07T16:53:51.443Z",
+          "is_active": true,
+          "shop_id": 3
+        }
+      ]
+    }
+  },
+  "DELETE /api/products/:product_id": {
+    "description": "deletes a single product according to its ID",
+    "queries": ["product_id"],
+    "requestParam": {
+      "shop_id": 1
+    },
+    "exampleResponse": "Successfully deleted product with ID: 5"
   }
 }

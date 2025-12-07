@@ -22,11 +22,11 @@ exports.fetchProductsFromShop = (shopId) => {
   return db
     .query(
       `SELECT * FROM products
-        WHERE shop_id=$1`,
+        WHERE shop_id=$1;`,
       [shopId]
     )
     .then(({ rows }) => {
-      return rows[0];
+      return rows;
     });
 };
 

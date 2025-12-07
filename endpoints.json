@@ -147,5 +147,148 @@
       "category_id": 1
     },
     "exampleResponse": "Successfully Deleted 1"
+  },
+  "GET /api/shops": {
+    "description": "serves an array of all shops",
+    "queries": [],
+    "exampleResponse": {
+      "allShops": [
+        {
+          "shop_id": 1,
+          "shop_name": "shop_name_example_1",
+          "shop_description": "shop 1 description",
+          "shop_url": "https://shop_1.example.com",
+          "logo_url": "https://shop_1.example.com/logo.png",
+          "location": "Manchester",
+          "source_type": "scraped",
+          "created_at": "2025-09-01T19:58:27.452Z",
+          "updated_at": "2025-09-01T19:58:27.452Z",
+          "category_id": 1
+        },
+        {
+          "shop_id": 2,
+          "shop_name": "shop_name_2",
+          "shop_description": "shop 2 descriptoin",
+          "shop_url": "https://shop_2.example.com",
+          "logo_url": "https://shop_2.example.com/logo.png",
+          "location": "London",
+          "source_type": "api",
+          "created_at": "2025-09-01T19:58:27.452Z",
+          "updated_at": "2025-09-01T19:58:27.452Z",
+          "category_id": null
+        }
+      ]
+    }
+  },
+  "GET /api/shops/:shop_id": {
+    "description": "serves specific shop by ID",
+    "queries": [],
+    "exampleResponse": {
+      "shop": [
+        {
+          "shop_id": 1,
+          "shop_name": "shop_name_example_1",
+          "shop_description": "shop 1 description",
+          "shop_url": "https://shop_1.example.com",
+          "logo_url": "https://shop_1.example.com/logo.png",
+          "location": "Manchester",
+          "source_type": "scraped",
+          "created_at": "2025-09-01T19:58:27.452Z",
+          "updated_at": "2025-09-01T19:58:27.452Z",
+          "category_id": 1
+        }
+      ]
+    }
+  },
+  "GET /api/categories/:shop_id/shops": {
+    "description": "serves array of all shops with the same category ID",
+    "queries": [],
+    "exampleResponse": {
+      "shopsBycategory": [
+        {
+          "shop_id": 1,
+          "shop_name": "shop_name_example_1",
+          "shop_description": "shop 1 description",
+          "shop_url": "https://shop_1.example.com",
+          "logo_url": "https://shop_1.example.com/logo.png",
+          "location": "Manchester",
+          "source_type": "scraped",
+          "created_at": "2025-09-01T19:58:27.452Z",
+          "updated_at": "2025-09-01T19:58:27.452Z",
+          "category_id": 1
+        },
+        {
+          "shop_id": 2,
+          "shop_name": "shop_name_example_2",
+          "shop_description": "shop 2 description",
+          "shop_url": "https://shop_2.example.com",
+          "logo_url": "https://shop_2.example.com/logo.png",
+          "location": "London",
+          "source_type": "api",
+          "created_at": "2025-09-01T19:58:27.452Z",
+          "updated_at": "2025-09-01T19:58:27.452Z",
+          "category_id": 1
+        }
+      ]
+    }
+  },
+  "POST /api/shops": {
+    "description": "creates a new shop",
+    "queries": [
+      "shop_name",
+      "shop_description",
+      "shop_url",
+      "logo_url",
+      "location",
+      "source_type",
+      "category_id"
+    ],
+    "exampleResponse": {
+      "shop": [
+        {
+          "shop_name": "hdhd",
+          "shop_description": "hdhd",
+          "shop_url": "hdhdh",
+          "logo_url": "hshs",
+          "location": "hshs",
+          "source_type": "hhsh",
+          "category_id": 1
+        }
+      ]
+    }
+  },
+  "PATCH /api/shops/:shop_id": {
+    "description": "updates shop according to ID",
+    "queries": [
+      "shop_id",
+      "shop_name",
+      "shop_description",
+      "shop_url",
+      "logo_url",
+      "location",
+      "source_type",
+      "category_id"
+    ],
+    "exampleResponse": {
+      "shop": [
+        {
+          "shop_name": "updated_shop_name",
+          "shop_description": "updated_shop_description",
+          "shop_url": "updated_shop_url",
+          "logo_url": "updated_shop_logo_url",
+          "location": "updated_shop_locatoin",
+          "source_type": "updated_shop_source_type",
+          "category_id": 1
+        }
+      ]
+    }
+  },
+  "DELETE /api/shops/:shop_id": {
+    "description": "deletes a single shop according to its ID",
+    "queries": ["shop_id"],
+    "requestParam": {
+      "shop_id": 1
+    },
+    "exampleResponse": "succefully deleted shop with id: 1"
   }
 }

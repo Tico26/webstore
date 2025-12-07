@@ -453,5 +453,39 @@
       "shop_id": 1
     },
     "exampleResponse": "Successfully deleted product with ID: 5"
+  },
+  "GET /api/products/:image_id/image": {
+    "description": "serves single image according to image ID",
+    "queries": [],
+    "exampleResponse": {
+      "image": {
+        "image_id": 1,
+        "product_id": 2,
+        "image_url": "https://lamona.example.com/item/1_1.jpg",
+        "alt_text": "alt_description_example",
+        "sort_order": 1
+      }
+    }
+  },
+  "POST /api/products/:image_id/image": {
+    "description": "creates a new image according to product",
+    "queries": ["product_id", "image_url", "alt_text", "sort_order"],
+    "exampleResponse": {
+      "image": {
+        "image_id": 5,
+        "product_id": 2,
+        "image_url": "https://lamona.example.com/item/1_1.jpg",
+        "alt_text": "alt_description_example",
+        "sort_order": 1
+      }
+    }
+  },
+  "DELETE /api/product-images/:image_id": {
+    "description": "deletes a single image according to its image ID",
+    "queries": ["image_id"],
+    "requestParam": {
+      "image_id": 5
+    },
+    "exampleResponse": "Succefully deleted image: 5"
   }
 }

@@ -44,7 +44,27 @@ exports.postTagToShop = (tagId, shopId) => {
       [tagId, shopId]
     )
     .then(({ rows }) => {
-      return rows;
+      return rows[0];
+    });
+};
+exports.fetchTagAndShopNames = (tagId, shopId) => {
+  return db
+    .query(
+      `
+      SELECT 
+        shop_tag.*,
+        tags.tag_name,
+        shops.shop_name
+      FROM shop_tag
+      JOIN tags ON shop_tag.tag_id = tags.tag_id
+      JOIN shops ON shop_tag.shop_id = shops.shop_id
+      WHERE shop_tag.tag_id = $1
+        AND shop_tag.shop_id = $2;
+      `,
+      [tagId, shopId]
+    )
+    .then(({ rows }) => {
+      return rows[0];
     });
 };
 
@@ -59,7 +79,7 @@ exports.patchTag = (tagId, tagName) => {
       [tagName, tagId]
     )
     .then(({ rows }) => {
-      return rows;
+      return rows[0];
     });
 };
 
@@ -71,12 +91,12 @@ exports.removeTag = (tagId) => {
   );
 };
 
-// exports.unlinkTagFromShop = (tagId, shopId) => {
-//   return db.query(
-//     `DELETE FROM shop_tag
-//     WHERE shop_id = $1
-//     AND
-//     tag_id=$2`,
-//     [shopId, tagId]
-//   );
-// };
+exports.unlinkTagFromShop = (tagId, shopId) => {
+  return db.query(
+    `DELETE FROM shop_tag
+    WHERE shop_id = $1
+    AND
+    tag_id=$2`,
+    [shopId, tagId]
+  );
+};

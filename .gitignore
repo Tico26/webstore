@@ -5,3 +5,5 @@ check-tables.sql
 setup.sql
 showTables.sql
 services
+.DS_Store
+db/.DS_Store

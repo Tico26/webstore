@@ -6,6 +6,7 @@ const {
   patchTag,
   removeTag,
   unlinkTagFromShop,
+  fetchTagAndShopNames,
 } = require("../models/tags.model");
 exports.getAllTags = async (req, res, next) => {
   try {
@@ -40,8 +41,13 @@ exports.addTagToShop = async (req, res, next) => {
   try {
     const { tag_id } = req.params;
     const { shop_id } = req.body;
-    const tag = await postTagToShop(tag_id, shop_id);
-    res.status(201).send(tag);
+    const newTags = await postTagToShop(tag_id, shop_id);
+    const tag = await fetchTagAndShopNames(newTags.tag_id, newTags.shop_id);
+    res
+      .status(201)
+      .send(
+        `Successfully attached tag: "${tag.tag_name}" to shop: "${tag.shop_name}"`
+      );
   } catch (err) {
     next(err);
   }
@@ -52,7 +58,7 @@ exports.updateTag = async (req, res, next) => {
     const { tag_id } = req.params;
     const { tag_name } = req.body;
     const tag = await patchTag(tag_id, tag_name);
-    res.status(200).send({ tag });
+    res.status(200).send(`Successfully updated to "${tag.tag_name}"`);
   } catch (err) {
     next(err);
   }
@@ -68,12 +74,12 @@ exports.deleteTag = async (req, res, next) => {
   }
 };
 
-// exports.removeTagFromShop = async (req, res, next) => {
-//   try {
-//     const { tag_id,shop_id } = req.params;
-//     await unlinkTagFromShop(tag_id, shop_id);
-//     res.status(201).send(`Deleted tag: ${tag_id} from shop ${shop_id}`);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
+exports.removeTagFromShop = async (req, res, next) => {
+  try {
+    const { tag_id, shop_id } = req.params;
+    await unlinkTagFromShop(tag_id, shop_id);
+    res.status(201).send(`Deleted tag: ${tag_id} from shop ${shop_id}`);
+  } catch (err) {
+    next(err);
+  }
+};

@@ -54,7 +54,6 @@
       ]
     }
   },
-
   "POST /api/user": {
     "description": "creates a user in the database",
     "queries": [
@@ -487,5 +486,74 @@
       "image_id": 5
     },
     "exampleResponse": "Succefully deleted image: 5"
+  },
+  "GET /api/tags": {
+    "description": "serves an array of all tags",
+    "queries": [],
+    "exampleResponse": {
+      "allTags": [
+        {
+          "tag_id": 1,
+          "tag_name": "Summer"
+        },
+        {
+          "tag_id": 2,
+          "tag_name": "Sports"
+        }
+      ]
+    }
+  },
+  "GET /api/shops/:shop_id/tags": {
+    "description": "serves an array of all tags from a specific store",
+    "queries": [],
+    "exampleResponse": {
+      "allTags": [
+        {
+          "shop_id": 2,
+          "tag_id": 2
+        },
+        {
+          "shop_id": 2,
+          "tag_id": 3
+        }
+      ]
+    }
+  },
+  "POST /api/tags": {
+    "description": "creates new tag",
+    "queries": ["tag_name"],
+    "exampleResponse": {
+      "tag": {
+        "tag_id": 3,
+        "tag_name": "Winter"
+      }
+    }
+  },
+  "POST /api/tags/:tag_id/shops": {
+    "description": "links a tag to specific store",
+    "queries": ["tag_id", "shop_id"],
+    "exampleResponse": "Successfully attached tag: \"Winter\" to shop: \"Retro Revival\""
+  },
+  "PATCH /api/tags/:tag_id": {
+    "description": "updates new tag name according to its ID",
+    "queries": ["tag_id", "tag_name"],
+    "exampleResponse": "Successfully updated to \"Winter\""
+  },
+  "DELETE /api/tags/:tag_id": {
+    "description": "deletes tag according to its ID",
+    "queries": ["tag_id"],
+    "requestParam": {
+      "tag_id": 1
+    },
+    "exampleResponse": "Deleted tag 1"
+  },
+  "DELETE /api/shops/:shop_id/tags/:tag_id": {
+    "description": "unlinks tag from associated shop",
+    "queries": ["shop_id", "tag_id"],
+    "requestParam": {
+      "shop_id": 1,
+      "tag_id": 1
+    },
+    "exampleResponse": "Deleted tag: 1 from shop 1"
   }
 }

@@ -23,11 +23,31 @@ exports.postFavouriteShop = (userId, shopId) => {
       [userId, shopId]
     )
     .then(({ rows }) => {
-      return rows;
+      return rows[0];
     });
 };
 
-exports.deleteFavouriteShop = (shopId, userId) => {
+exports.fetchFavouriteShopAndUser = (userId, shopId) => {
+  return db
+    .query(
+      `
+      SELECT
+        shops.shop_name,
+        users.first_name,
+        users.last_name,
+        users.username
+      FROM favourite_shops
+      JOIN users ON favourite_shops.user_id = users.user_id
+      JOIN shops ON favourite_shops.shop_id = shops.shop_id
+      WHERE favourite_shops.user_id = $1
+        AND favourite_shops.shop_id = $2;
+      `,
+      [userId, shopId]
+    )
+    .then(({ rows }) => rows[0]);
+};
+
+exports.deleteFavouriteShop = (userId, shopId) => {
   return db.query(
     `DELETE FROM favourite_shops 
         WHERE shop_id = $1 AND user_id =$2`,

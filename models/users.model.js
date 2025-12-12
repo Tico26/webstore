@@ -50,7 +50,7 @@ exports.postUser = (
       ]
     )
     .then(({ rows }) => {
-      return rows;
+      return rows[0];
     });
 };
 
@@ -79,15 +79,15 @@ exports.patchUser = (
   return db
     .query(
       `
-    UPDATE user
-    SET 
-    first_name=$1,
-    last_name=$2,
-    email=$3,
-    date_of_birth=$4,
-    username=$5,
-    password_hash=$6,
-    is_admin=$7
+    UPDATE users
+      SET 
+      first_name=$1,
+      last_name=$2,
+      email=$3,
+      date_of_birth=$4,
+      username=$5,
+      password_hash=$6,
+      is_admin=$7
     WHERE user_id=$8
     RETURNING *
     `,
@@ -102,8 +102,8 @@ exports.patchUser = (
         userId,
       ]
     )
-    .then((rows) => {
-      rows[0];
+    .then(({ rows }) => {
+      return rows[0];
     });
 };
 exports.removeUser = (userId) => {

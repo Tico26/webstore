@@ -4,6 +4,7 @@ const {
   postUser,
   authenticateUserModel,
   removeUser,
+  patchUser,
 } = require("../models/users.model");
 
 exports.getAllUsers = async (req, res, next) => {
@@ -54,7 +55,7 @@ exports.addUser = async (req, res, next) => {
 exports.authenticateUser = async (req, res, next) => {
   try {
     const { email, username, password_hash } = req.body;
-    authenticateUserModel(email, username, password_hash);
+    await authenticateUserModel(email, username, password_hash);
     res.status(200).send("Successful login");
   } catch (err) {
     next(err);
@@ -73,16 +74,17 @@ exports.updateUser = async (req, res, next) => {
       password_hash,
       is_admin,
     } = req.body;
-
-    res.status(200).send({
+    const user = await patchUser(
+      user_id,
       first_name,
       last_name,
       email,
       date_of_birth,
       username,
       password_hash,
-      is_admin,
-    });
+      is_admin
+    );
+    res.status(200).send({ user });
   } catch (err) {
     next(err);
   }

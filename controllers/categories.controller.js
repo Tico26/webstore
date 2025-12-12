@@ -54,7 +54,7 @@ exports.deleteCategory = async (req, res, next) => {
   try {
     const { category_id } = req.params;
     await removeCategory(category_id);
-    res.status(201).send(`Successfully deleted ${category_id}`);
+    res.status(201).send(`Successfully deleted category`);
   } catch (err) {
     next(err);
   }

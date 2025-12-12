@@ -65,7 +65,7 @@ app.get("/api", getApi);
 app.get("/api/users", getAllUsers);
 app.get("/api/users/:user_id", getUserById);
 // //register user
-app.post("/api/user", addUser);
+app.post("/api/users", addUser);
 // //authenticate user
 app.post("/api/user/login", authenticateUser);
 app.patch("/api/users/:user_id", updateUser);

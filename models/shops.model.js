@@ -100,7 +100,7 @@ exports.patchShop = (
       ]
     )
     .then(({ rows }) => {
-      return rows;
+      return rows[0];
     });
 };
 

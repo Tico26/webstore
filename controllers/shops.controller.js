@@ -94,7 +94,7 @@ exports.deleteShop = async (req, res, next) => {
   try {
     const { shop_id } = req.params;
     await removeShop(shop_id);
-    res.status(201).send(`succefully deleted shop with id: ${shop_id}`);
+    res.status(201).send(`Succefully deleted store`);
   } catch (err) {
     next(err);
   }

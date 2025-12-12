@@ -38,20 +38,18 @@
     "description": "serves single user by id",
     "queries": [],
     "exampleResponse": {
-      "user": [
-        {
-          "user_id": 34,
-          "first_name": "user_1_first",
-          "last_name": "user_2_last",
-          "username": "username1",
-          "date_of_birth": "2000-12-12T00:00:00.000Z",
-          "email": "user1@example.com",
-          "password_hash": "hashedpw1",
-          "created_at": "2025-09-01T20:58:27.457Z",
-          "is_admin": false,
-          "last_login": "2025-09-01T20:58:27.457Z"
-        }
-      ]
+      "user": {
+        "user_id": 1,
+        "first_name": "Bruno",
+        "last_name": "Jauad",
+        "username": "vintagequeen",
+        "date_of_birth": "2000-12-12T00:00:00.000Z",
+        "email": "user1@example.com",
+        "password_hash": "hashedpw1",
+        "created_at": "2025-12-10T13:36:18.929Z",
+        "is_admin": false,
+        "last_login": "2025-12-10T13:36:18.929Z"
+      }
     }
   },
   "POST /api/user": {
@@ -66,26 +64,50 @@
       "is_admin"
     ],
     "exampleResponse": {
-      "user": [
-        {
-          "shop_id": 1,
-          "shop_name": "LaMona Vintage",
-          "shop_description": "A curated vintage fashion boutique.",
-          "shop_url": "https://lamona.example.com",
-          "logo_url": "https://lamona.example.com/logo.png",
-          "location": "Manchester",
-          "source_type": "scraped",
-          "created_at": "2025-09-01T20:58:27.452Z",
-          "updated_at": "2025-09-01T20:58:27.452Z",
-          "category_id": 1
-        }
-      ]
+      "user": {
+        "shop_id": 1,
+        "shop_name": "LaMona Vintage",
+        "shop_description": "A curated vintage fashion boutique.",
+        "shop_url": "https://lamona.example.com",
+        "logo_url": "https://lamona.example.com/logo.png",
+        "location": "Manchester",
+        "source_type": "scraped",
+        "created_at": "2025-09-01T20:58:27.452Z",
+        "updated_at": "2025-09-01T20:58:27.452Z",
+        "category_id": 1
+      }
     }
   },
   "POST /api/user/login": {
     "description": "authenticates user login",
     "queries": ["email", "username", "password_hash"],
     "exampleResponse": "Successful login"
+  },
+
+  "PATCH /api/users/:user_id": {
+    "description": "updates user according to ID",
+    "queries": [
+      "first_name",
+      "last_name",
+      "email",
+      "username",
+      "password_hash",
+      "is_admin"
+    ],
+    "exampleResponse": {
+      "user": {
+        "user_id": 1,
+        "first_name": "Bruoooo",
+        "last_name": "Jauad",
+        "username": "vintagequeeien",
+        "date_of_birth": "2000-12-12T00:00:00.000Z",
+        "email": "user1@examphle.com",
+        "password_hash": "new",
+        "created_at": "2025-12-10T14:11:23.933Z",
+        "is_admin": false,
+        "last_login": "2025-12-10T14:11:23.933Z"
+      }
+    }
   },
   "DELETE /api/user/:user_id": {
     "description": "deletes a single user",
@@ -117,26 +139,22 @@
     "description": "creates a category in the database",
     "queries": ["category_name", "category_description"],
     "exampleResponse": {
-      "category": [
-        {
-          "category_id": 5,
-          "category_name": "category_name_example",
-          "category_description": "category_description_example"
-        }
-      ]
+      "category": {
+        "category_id": 5,
+        "category_name": "category_name_example",
+        "category_description": "category_description_example"
+      }
     }
   },
   "PATCH /api/categories/:category_id": {
     "description": "updates a category in the database according to its ID",
     "queries": ["category_id", "category_name", "category_description"],
     "exampleResponse": {
-      "category": [
-        {
-          "category_id": 1,
-          "category_name": "updated_category_name",
-          "category_description": "updated_category_description"
-        }
-      ]
+      "category": {
+        "category_id": 1,
+        "category_name": "updated_category_name",
+        "category_description": "updated_category_description"
+      }
     }
   },
   "DELETE /api/categories/:category_id": {
@@ -145,7 +163,7 @@
     "requestParam": {
       "category_id": 1
     },
-    "exampleResponse": "Successfully Deleted 1"
+    "exampleResponse": "Successfully deleted category"
   },
   "GET /api/shops": {
     "description": "serves an array of all shops",
@@ -269,17 +287,15 @@
       "category_id"
     ],
     "exampleResponse": {
-      "shop": [
-        {
-          "shop_name": "updated_shop_name",
-          "shop_description": "updated_shop_description",
-          "shop_url": "updated_shop_url",
-          "logo_url": "updated_shop_logo_url",
-          "location": "updated_shop_locatoin",
-          "source_type": "updated_shop_source_type",
-          "category_id": 1
-        }
-      ]
+      "shop": {
+        "shop_name": "updated_shop_name",
+        "shop_description": "updated_shop_description",
+        "shop_url": "updated_shop_url",
+        "logo_url": "updated_shop_logo_url",
+        "location": "updated_shop_locatoin",
+        "source_type": "updated_shop_source_type",
+        "category_id": 1
+      }
     }
   },
   "DELETE /api/shops/:shop_id": {
@@ -288,7 +304,7 @@
     "requestParam": {
       "shop_id": 1
     },
-    "exampleResponse": "succefully deleted shop with id: 1"
+    "exampleResponse": "Succefully deleted store"
   },
   "GET /api/products": {
     "description": "serves an array of all products",

@@ -42,6 +42,7 @@ const {
   getImage,
   addImage,
   deleteImage,
+  updateImage,
 } = require("./controllers/image.controller");
 
 const {
@@ -96,6 +97,7 @@ app.delete("/api/products/:product_id", deleteProduct);
 // // //image apis
 app.get("/api/products/:image_id/image", getImage);
 app.post("/api/products/:product_id/image", addImage);
+app.patch("/api/products/:image_id/image", updateImage);
 app.delete("/api/product-images/:image_id", deleteImage);
 
 app.get("/api/tags", getAllTags);
